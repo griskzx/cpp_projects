@@ -10,9 +10,22 @@ if(NOT MAIN_SOURCES)
     message(FATAL_ERROR "No .cpp files found under src/.")
 endif()
 
-set(AVAILABLE_MAIN_FILES "")
+set(ENTRY_MAIN_FILES "")
 foreach(source_file IN LISTS MAIN_SOURCES)
-    get_filename_component(file_name "${source_file}" NAME)
+    file(READ "${source_file}" source_content)
+    string(REGEX MATCH "([ \t\r\n]|^)int[ \t\r\n]+main[ \t\r\n]*\\(" has_main "${source_content}")
+    if(has_main)
+        get_filename_component(file_name "${source_file}" NAME)
+        list(APPEND ENTRY_MAIN_FILES "${file_name}")
+    endif()
+endforeach()
+
+if(NOT ENTRY_MAIN_FILES)
+    message(FATAL_ERROR "No source file with int main(...) found under src/.")
+endif()
+
+set(AVAILABLE_MAIN_FILES "")
+foreach(file_name IN LISTS ENTRY_MAIN_FILES)
     list(APPEND AVAILABLE_MAIN_FILES "${file_name}")
 endforeach()
 
@@ -38,5 +51,7 @@ endif()
 
 set(SELECTED_MAIN_SOURCE "${CMAKE_CURRENT_SOURCE_DIR}/src/${MAIN_FILE}")
 get_filename_component(TARGET_NAME "${MAIN_FILE}" NAME_WE)
+set(CMAKE_TARGET_NAME "${PROJECT_NAME}_${TARGET_NAME}")
 
-add_executable(${TARGET_NAME} "${SELECTED_MAIN_SOURCE}")
+add_executable(${CMAKE_TARGET_NAME} "${SELECTED_MAIN_SOURCE}")
+set_target_properties(${CMAKE_TARGET_NAME} PROPERTIES OUTPUT_NAME "${TARGET_NAME}")

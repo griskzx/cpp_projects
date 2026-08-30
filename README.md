@@ -20,7 +20,7 @@ cmake --build --preset release
 
 ### 多个 `main` 文件时如何选择编译目标
 
-如果 `src/` 下有多个 `*.cpp`（每个文件都可能有 `main`），可以在配置时通过 `MAIN_FILE` 指定本次要编译的入口文件：
+如果 `src/` 下有多个 `*.cpp`，CMake 会自动从中识别包含 `int main(...)` 的文件作为可选入口；然后可在配置时通过 `MAIN_FILE` 指定本次要编译的入口文件：
 
 ```powershell
 # 例如只编译 src/hello.cpp
