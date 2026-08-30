@@ -4,7 +4,7 @@
 
 ## 构建方式
 
-项目使用 CMake Presets，编译器为 Clang，提供 `debug` 和 `release` 两种预设：
+项目使用 CMake Presets，要求 CMake 4.2+，编译器为 Clang，C++ 标准为 C++20，提供 `debug` 和 `release` 两种预设：
 
 ```powershell
 # 配置
