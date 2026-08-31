@@ -10,3 +10,7 @@ add_executable(cpp_project bin/main.cpp
 add_executable(hello bin/hello.cpp)
 
 add_library(tools tools/tools.cpp tools/tools.hpp)
+
+target_link_libraries(cpp_project
+        PRIVATE tools
+)
