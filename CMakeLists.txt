@@ -7,8 +7,10 @@ add_executable(cpp_project src/bin/main.cpp)
 
 add_executable(hello src/bin/hello.cpp)
 
-add_library(tools src/tools/tools.cpp src/tools/tools.hpp)
+add_library(tools src/tools/tools.cpp src/tools/tools.hpp
+        src/data_structure/inc/Node.hpp)
 
 target_link_libraries(cpp_project
         PRIVATE tools
 )
+add_executable(node src/bin/node_example.cpp)
