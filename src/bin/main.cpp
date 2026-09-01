@@ -1,5 +1,5 @@
 #include <iostream>
-#include "../tools/tools.hpp"
+#include "../tools/inc/tools.hpp"
 
 int main() {
     std::cout << "Hello, World :main.exe" << std::endl;

@@ -2,8 +2,8 @@
 // Created by HP on 2026/8/31.
 //
 
-#include "tools.hpp"
+#include "../inc/tools.hpp"
 
 auto add(const int a, const int b) -> int {
-    return a+b;
+    return a + b;
 }
