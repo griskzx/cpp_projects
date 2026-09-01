@@ -11,32 +11,39 @@
 // template <typename T>
 // concept DefaultInitializable = requires { T{}; };
 
-template <std::default_initializable T>
+template<std::default_initializable T>
 class Node {
 public:
     Node() = default;
+
     auto get_data() {
         return this->data;
     }
+
     auto get_prev() {
         return this->prev;
     }
-    auto get_next(){
+
+    auto get_next() {
         return this->next;
     }
-    auto set_data(const T data)  {
+
+    auto set_data(const T data) {
         this->data = data;
     }
-    auto set_prev( Node<T>* _prev)  {
+
+    auto set_prev(Node<T> *_prev) {
         this->prev = _prev;
     }
-    auto set_next( Node<T>* next) {
+
+    auto set_next(Node<T> *next) {
         this->next = next;
     }
+
 private:
     T data{};
-    Node<T>* next = nullptr;
-    Node<T>* prev = nullptr;
+    Node<T> *next = nullptr;
+    Node<T> *prev = nullptr;
 };
 
 
