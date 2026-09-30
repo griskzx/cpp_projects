@@ -1,31 +1,12 @@
 cmake_minimum_required(VERSION 4.4)
-project(cpp_project)
+project(cpp_examples LANGUAGES CXX)
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
+# 让 clangd 使用与实际编译相同的标准、头文件路径和编译选项。
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON CACHE BOOL "Export compile commands for clangd")
 
-add_executable(cpp_project src/bin/main.cpp)
-target_link_libraries(cpp_project
-        PRIVATE tools
-)
-
-add_executable(hello src/bin/hello.cpp)
-
-add_library(tools
-        src/tools/src/tools.cpp
-        src/tools/inc/tools.hpp
-        src/data_structure/inc/Node.hpp
-        src/data_structure/inc/list.hpp
-        src/data_structure/src/list.cpp
-        src/tools/inc/result.hpp
-        src/tools/inc/macro.hpp)
-
-
-add_executable(node src/bin/node_example.cpp)
-target_link_libraries(node
-        PRIVATE tools
-)
-
-add_executable(const_example src/bin/const_exampl.cpp)
-target_link_libraries(const_example
-        PRIVATE tools
-)
+include(CTest)
+add_subdirectory(examples)

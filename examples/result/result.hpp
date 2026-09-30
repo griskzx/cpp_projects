@@ -1,9 +1,5 @@
-//
-// Created by HP on 2026/9/1.
-//
-
-#ifndef CPP_PROJECT_RESULT_HPP
-#define CPP_PROJECT_RESULT_HPP
+#ifndef CPP_EXAMPLES_RESULT_HPP
+#define CPP_EXAMPLES_RESULT_HPP
 
 #include <variant>
 #include <utility>
@@ -53,6 +49,7 @@ private:
 };
 
 
+// 先判断状态再取值；读取不匹配的分支会抛出 std::bad_variant_access。
 template<typename T, typename E>
 class Result {
 public:
@@ -90,7 +87,7 @@ private:
     std::variant<Ok<T>, Err<E> > data_;
 };
 
-//特化Ok is ok
+// 成功时不需要返回值的特化，例如链表插入。
 template<typename E>
 class Result<void, E> {
 public:
@@ -112,8 +109,12 @@ public:
         return std::get<Err<E> >(data_).get_value();
     }
 
+    const E &get_error() const {
+        return std::get<Err<E> >(data_).get_value();
+    }
+
 private:
     std::variant<Ok<void>, Err<E> > data_;
 };
 
-#endif //CPP_PROJECT_RESULT_HPP
+#endif // CPP_EXAMPLES_RESULT_HPP
