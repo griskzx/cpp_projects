@@ -1,5 +1,3 @@
-#pragma once
-
 #include <print>
 
 #include "lib.hpp"

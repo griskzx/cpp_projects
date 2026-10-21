@@ -65,8 +65,7 @@ class B{
         explicit B(std::string_view s ):s_(s){}
 
         //拷贝构造函数
-        B(const B& other):b_(other.b_),s_(other.s_),v_(new std::vector(std::string) ){
+        B(const B& other):b_(other.b_),s_(other.s_),v_(other.v_){
             std::copy(other.v_.begin(), other.v_.end(), v_.begin());
         }
-
-}
+};

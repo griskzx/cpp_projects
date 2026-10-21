@@ -1,3 +1,8 @@
 # 相对本文件查找 CMake 生成的编译数据库。
 CompileFlags:
   CompilationDatabase: build
+  Add:
+    - -std=c++23
+  Remove:
+    - -fmodule-file=*
+    - -fmodule-output=*
